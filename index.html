@@ -6,7 +6,17 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body ng-app="ngCribs" ng-controller="cribsController">
-<h1>{{ hello }}</h1>
+<!-- ng-repeat allows us to use a key word "crib" to repeat the data array from "cribs" -->
+	<div class="well" ng-repeat="crib in cribs">
+		<h3>{{ crib.address }}</h3>
+		<p><strong>Type: </strong>{{ crib.type }}</p>
+		<p><strong>Description: </strong>{{ crib.description }}</p>
+<!-- 		currency filter -->
+		<p><strong>Price: </strong>{{ crib.price | currency }}</p>
+	</div>
+
+<!-- use pipe line to filter (json) use pre-tag to clean up format -->
+<pre>{{ cribs | json }}</pre>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
