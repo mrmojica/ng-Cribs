@@ -1,0 +1,19 @@
+<!-- 	ng-model allows us to reference message -->
+	<input type="text" placeholder="Leave a message" ng-model="message">
+	<h2>{{ message }}</h2>
+
+<!-- set show message to the opposite instead of using true/false -->
+<button ng-click="showMessage = !showMessage">Toggle Message</button>
+<h2 ng-show="showMessage == true">Secret Message</h2>
+
+<!-- ng-repeat allows us to use a key word "crib" to repeat the data array from "cribs" -->
+	<div class="well" ng-repeat="crib in cribs.data">
+		<h3>{{ crib.address }}</h3>
+		<p><strong>Type: </strong>{{ crib.type }}</p>
+		<p><strong>Description: </strong>{{ crib.description }}</p>
+<!-- 		currency filter -->
+		<p><strong>Price: </strong>{{ crib.price | currency }}</p>
+	</div>
+
+<!-- use pipe line to filter (json) use pre-tag to clean up format -->
+<!-- <pre>{{ cribs | json }}</pre> -->

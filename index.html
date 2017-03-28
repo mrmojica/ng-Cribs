@@ -3,27 +3,66 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ngCribs</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!--     <link rel="stylesheet" href="css/style.css"> -->
 </head>
 <body ng-app="ngCribs" ng-controller="cribsController">
-<!-- 	ng-model allows us to reference message -->
-	<input type="text" placeholder="Leave a message" ng-model="message">
-	<h2>{{ message }}</h2>
 
-<!-- set show message to the opposite instead of using true/false -->
-<button ng-click="showMessage = !showMessage">Toggle Message</button>
-<h2 ng-show="showMessage == true">Secret Message</h2>
-<!-- ng-repeat allows us to use a key word "crib" to repeat the data array from "cribs" -->
-	<div class="well" ng-repeat="crib in cribs.data">
-		<h3>{{ crib.address }}</h3>
-		<p><strong>Type: </strong>{{ crib.type }}</p>
-		<p><strong>Description: </strong>{{ crib.description }}</p>
-<!-- 		currency filter -->
-		<p><strong>Price: </strong>{{ crib.price | currency }}</p>
-	</div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+      </a>
+    </div>
+  </div>
+</nav>
 
-<!-- use pipe line to filter (json) use pre-tag to clean up format -->
-<!-- <pre>{{ cribs | json }}</pre> -->
+<!-- Real Estate Listing -->
+<div class="container">
+	<div class="col-sm-4" ng-repeat="crib in cribs.data">
+		<div class="thumbnail">
+			<img ng-src="images/{{crib.image}}.jpg" alt="">
+			<div class="caption">
+            <div ng-hide="showDetails === true">
+              <h3><i class="glyphicon glyphicon-tag"></i> {{crib.price | currency}}</h3>
+              <h4><i class="glyphicon glyphicon-home"></i> {{crib.address}} 
+                <span class="label label-primary label-sm">{{crib.type}}</span>
+              </h4>
+
+            </div>             
+
+            <button class="btn btn-xs btn-success" 
+                    ng-hide="showDetails === true" 
+                    ng-click="showDetails = !showDetails">
+                    Details
+            </button>
+
+            <button 
+            	class="btn btn-xs btn-primary"
+            	ng-show="showDetails"
+            	ng-click="editCrib(crib)">Edit
+            </button>
+
+            <button class="btn btn-xs btn-danger" 
+                    ng-show="showDetails === true"
+                    ng-click="showDetails = !showDetails">
+                    Close
+            </button>
+			<!-- additional details -->
+            <div class="details" ng-show="showDetails === true">
+              <h4>
+                <span class="label label-primary">Beds: {{crib.details.bedrooms}}</span>
+                <span class="label label-primary">Baths: {{crib.details.bathrooms}}</span>
+                <span class="label label-primary">SqFt: {{crib.details.area}}</span>
+              </h4>
+              <p>{{crib.description}}</p>              
+            </div>
+
+          </div> 
+        </div>
+      </div>          
+    </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
