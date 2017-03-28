@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>ngCribs</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<!--     <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body ng-app="ngCribs" ng-controller="cribsController">
 
@@ -17,9 +17,50 @@
   </div>
 </nav>
 
+<!-- Min and Max Price Selection -->
+		  <div class="col-sm-12 price-form">      
+				<div class="row price-form-row" ng-if="!addListing">
+			    <div class="col-sm-6">
+			      <div class="input-group">
+			        <span class="input-group-addon">Min Price</span>
+			        <select name="minPrice" id="minPrice" ng-model="priceInfo.min" class="form-control">
+			          <option value="100000">$100,000</option>
+			          <option value="200000">$200,000</option>
+			          <option value="300000">$300,000</option>
+			          <option value="400000">$400,000</option>
+			          <option value="500000">$500,000</option>
+			          <option value="600000">$600,000</option>
+			          <option value="700000">$700,000</option>
+			          <option value="800000">$800,000</option>
+			          <option value="900000">$900,000</option>
+			          <option value="1000000">$1,000,000</option>
+			        </select>
+			      </div>          
+			    </div>
+
+			    <div class="col-sm-6">
+			      <div class="input-group">
+			        <span class="input-group-addon">Max Price</span>
+			        <select name="maxPrice" id="maxPrice" ng-model="priceInfo.max" class="form-control">
+			          <option value="100000">$100,000</option>
+			          <option value="200000">$200,000</option>
+			          <option value="300000">$300,000</option>
+			          <option value="400000">$400,000</option>
+			          <option value="500000">$500,000</option>
+			          <option value="600000">$600,000</option>
+			          <option value="700000">$700,000</option>
+			          <option value="800000">$800,000</option>
+			          <option value="900000">$900,000</option>
+			          <option value="1000000">$1,000,000</option>
+			        </select>
+			      </div>          
+			    </div>
+				</div>
+
 <!-- Real Estate Listing -->
 <div class="container">
-	<div class="col-sm-4" ng-repeat="crib in cribs.data">
+<!-- add custom cribsFilter and add :priceInfo to pass the argument -->
+	<div class="col-sm-4" ng-repeat="crib in cribs.data | cribsFilter:priceInfo">
 		<div class="thumbnail">
 			<img ng-src="images/{{crib.image}}.jpg" alt="">
 			<div class="caption">
@@ -69,5 +110,6 @@
 <script src="app.js"></script>
 <script src="scripts/cribsController.js"></script>
 <script src="scripts/cribsFactory.js"></script>
+<script src="scripts/cribsFilter.js"></script>
 </body>
 </html>
